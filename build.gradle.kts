@@ -21,6 +21,15 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
+	runtimeOnly("com.h2database:h2")
+	implementation("mysql:mysql-connector-java")
 }
 
 tasks.withType<KotlinCompile> {
