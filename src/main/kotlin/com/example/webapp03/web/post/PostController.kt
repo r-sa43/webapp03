@@ -1,5 +1,6 @@
 package com.example.webapp03.web.post
 
+import com.example.webapp03.domain.post.PostEntity
 import com.example.webapp03.domain.post.PostService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -20,6 +21,10 @@ class PostController(
     @GetMapping("")
     fun showPostList(model: Model): String {
         model.addAttribute("postList", postService.findAll())
+        for (item: PostEntity in postService.findAll()) {
+            println(item.post_id)
+            println(item.goodCounts)
+        }
         return "post/list"
     }
 
