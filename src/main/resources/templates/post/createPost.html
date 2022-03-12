@@ -9,9 +9,10 @@
 <h1 class="mt-3">投稿作成画面</h1>
 <div class="card">
     <div class="card-body">
+        <!--/*@thymesVar id="postForm" type="com.example.webapp03.web.post.PostForm"*/-->
         <form action="#" th:action="@{/post}" th:method="post" th:object="${postForm}">
             <div class="form-group">
-                <label for="descriptionInput">内容入力</label>
+                <label for="contentsInput">内容入力</label>
                 <textarea class="form-control" id="contentsInput" rows="10" th:field="*{contents}"></textarea>
                 <small class="form-text text-muted" th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">(error_msg)</small>
                 <p id="log"></p>
@@ -22,8 +23,6 @@
         </form>
     </div>
 </div>
-</body>
-
 <script>
     const inputElm = document.getElementById('contentsInput');
     inputElm.addEventListener('change', validateStrLen);
@@ -32,13 +31,14 @@
 
     function validateStrLen(e) {
         const contents = e.target.value;
-        submitBtnElm.setAttribute("disabled", '');
+        submitBtnElm.setAttribute("disabled", 'true');
         if (!isValidLen(contents)) {
             alert("文字数制限を超えています")
         } else {
             submitBtnElm.removeAttribute("disabled");
         }
     }
+
     function isValidLen(contents) {
         let ret = 0;
         Array.prototype.forEach.call(contents, (str) => {
@@ -49,4 +49,5 @@
         return ret <= maxLen;
     }
 </script>
+</body>
 </html>
