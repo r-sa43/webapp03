@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.webapp03.domain.good.GoodRepository">
+
+    <insert id="save" useGeneratedKeys="true" parameterType="Map">
+        INSERT INTO d_good (post_id, user_id)
+        VALUES (#{postId}, #{userId})
+    </insert>
+
+<!--    <insert id="delete" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">-->
+<!--        DELETE-->
+<!--        FROM d_good-->
+<!--        WHERE d_good.post_id = #{postId}-->
+<!--          AND d_good.user_id = #{userId}-->
+<!--    </insert>-->
+</mapper>
