@@ -1,0 +1,22 @@
+spring:
+  thymeleaf:
+    prefix:
+      file: src/main/resources/templates/
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/webappdb
+    username: ${USER_NAME}
+    password: ${PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+mybatis:
+  mapper-locations: classpath*:/com/example/webapp03/domain/**/*.xml
+  type-aliases-package: com.example.webapp03.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    cache-enabled: false

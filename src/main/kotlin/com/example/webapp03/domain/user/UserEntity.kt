@@ -10,19 +10,10 @@ import java.util.*
 @Data
 class UserEntity {
 
-    var id: Int
-    var user_cognito_id: String
-    var name: String
-    val email: String
-    val created_at: Date
-    val updated_at: Date
-
-    init {
-        id = 0
-        user_cognito_id = ""
-        name = ""
-        email = ""
-        created_at = Date()
-        updated_at = Date()
-    }
+    var id: Int = 0
+    var user_cognito_id: String = ""
+    var name: String = ""
+    val email: String = ""
+    val created_at: Date = Date()
+    val updated_at: Date = Date()
 }

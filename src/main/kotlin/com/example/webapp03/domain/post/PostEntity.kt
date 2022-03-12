@@ -1,30 +1,14 @@
 package com.example.webapp03.domain.post
 
 import com.example.webapp03.domain.user.UserEntity
-import lombok.AllArgsConstructor
-import lombok.Data
-import lombok.NoArgsConstructor
 import java.math.BigInteger
-import java.util.*
+import java.util.Date
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 class PostEntity {
 
-    val post_id: BigInteger
-    val user_id: Int
-    val contents: String
-    val created: Date
-    val users: List<UserEntity>
-    val user_one: UserEntity
-
-    init {
-        post_id = BigInteger.ZERO
-        user_id = 0
-        contents = ""
-        created = Date()
-        users = listOf()
-        user_one = UserEntity()
-    }
+    val post_id: BigInteger = BigInteger.ZERO
+    val user_id: Int = 0
+    val contents: String = ""
+    val created: Date = Date()
+    val users: List<UserEntity> = listOf()
 }
