@@ -1,7 +1,6 @@
 package com.example.webapp03.web.post
 
 import com.example.webapp03.domain.post.PostService
-import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("post")
-@RequiredArgsConstructor
 class PostController(
     private val postService: PostService,
 ) {
