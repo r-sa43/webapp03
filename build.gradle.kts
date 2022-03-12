@@ -26,6 +26,7 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
 	runtimeOnly("com.h2database:h2")

@@ -10,7 +10,7 @@ import java.util.*
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-class PostEntity {
+class PostEntity() {
 
     val post_id: BigInteger
     val user_id: Int
@@ -21,8 +21,8 @@ class PostEntity {
 
     init {
         post_id = BigInteger.ZERO
-        user_id = 0
-        contents = ""
+        this.user_id = 0
+        this.contents = ""
         created = Date()
         users = listOf()
         user_one = UserEntity()

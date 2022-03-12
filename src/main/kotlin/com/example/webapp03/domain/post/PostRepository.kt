@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper
 interface PostRepository {
 
     fun findAll(): List<PostEntity>
+
+    fun save(param: Map<String, String>)
 }
