@@ -7,9 +7,6 @@ spring:
     url: jdbc:mysql://localhost:3306/webappdb
     username: ${USER_NAME}
     password: ${PASSWORD}
-  jpa:
-    hibernate:
-      ddl-auto: update
 
 
 mybatis:

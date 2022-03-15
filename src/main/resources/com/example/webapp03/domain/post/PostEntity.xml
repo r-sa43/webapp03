@@ -5,20 +5,19 @@
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
     <!--<mapper namespace="posts">-->
 
-    <select id="findAll" resultMap="postResult">
-        SELECT *
-        FROM d_posts
+    <select id="findAll" resultMap="postResult" parameterType="Map">
+        select * from d_posts limit #{limit} offset #{offset};
     </select>
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
-        <id column="post_id" property="post_id"/>
+        <id column="post_id" property="postId"/>
         <result column="created_at" property="created"/>
         <collection
-            property="users"
-            ofType="com.example.webapp03.domain.user.UserEntity"
-            javaType="ArrayList"
-            column="user_id"
-            select="findUser"
+                property="user"
+                ofType="com.example.webapp01.domain.user.UserEntity"
+                javaType="com.example.webapp03.domain.user.UserEntity"
+                column="user_id"
+                select="findUser"
         />
         <collection
             property="goodCounts"
@@ -29,23 +28,22 @@
         />
     </resultMap>
 
-    <select id="findUser" resultMap="UserMap">
-        select *
-        from m_users
-        where m_users.id = #{user_id};
+    <select id="findUser" resultMap="userMap">
+        select mu.name, mu.created_at from m_users as mu where mu.id = #{user_id}
     </select>
-    <resultMap id="UserMap" type="com.example.webapp03.domain.user.UserEntity">
+
+    <resultMap id="userMap" type="com.example.webapp03.domain.user.UserEntity">
         <id column="id" property="id"/>
     </resultMap>
 
 
-    <select id="countGood" resultMap="CountMap">
+    <select id="countGood" resultMap="countMap">
         SELECT COUNT(*)
         FROM d_good
         WHERE d_good.post_id = #{post_id};
     </select>
-    <resultMap id="CountMap" type="com.example.webapp03.domain.good.GoodEntity">
-        <id column="post_id" property="post_id"/>
+    <resultMap id="countMap" type="com.example.webapp03.domain.good.GoodEntity">
+        <id column="post_id" property="postId"/>
     </resultMap>
 
 

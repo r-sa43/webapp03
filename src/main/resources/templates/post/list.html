@@ -11,8 +11,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between bd-highlight mb-3">
-                    <p class="card-text p-2 bd-highlight" th:text="${post.users.get(0).name}">(userName)</p>
-                    <p class="card-text p-2 bd-highlight" th:text="${post.created}">(created_at)</p>
+                    <p class="card-text p-2 bd-highlight" th:text="${post.user.name}">(userName)</p>
+                    <p class="card-text p-2 bd-highlight" th:text="${post.created}">2022/03/12(created_at)</p>
                 </div>
 
                 <p class="card-text text-center" th:text="${post.contents}">(contents)</p>
