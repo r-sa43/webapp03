@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper
 @Mapper
 interface PostRepository {
 
-    fun findAll(): List<PostEntity>
+    fun findAll(param: HashMap<String, Int>): List<PostEntity>
 }
