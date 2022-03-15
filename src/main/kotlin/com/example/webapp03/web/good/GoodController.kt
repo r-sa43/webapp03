@@ -16,8 +16,10 @@ class GoodController(
     @PutMapping
     fun countUp(
         @RequestParam("post_id") post_id: Int,
-    ){
+    ): String {
         goodService.countUpGoodCnt(post_id)
+
+        return "post/list"
     }
 
 //    @DeleteMapping
