@@ -6,10 +6,10 @@ import java.util.Date
 
 class PostEntity {
 
-    val post_id: BigInteger = BigInteger.ZERO
-    val user_id: Int = 0
+    val postId: BigInteger = BigInteger.ZERO
+    val userId: Int = 0
     val contents: String = ""
     val created: Date = Date()
-    val users: List<UserEntity> = listOf()
+    val user: UserEntity = UserEntity()
     val goodCounts: Int = 0
 }

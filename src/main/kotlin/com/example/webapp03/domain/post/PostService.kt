@@ -8,8 +8,11 @@ class PostService(
     private val postRepository: PostRepository
 ) {
 
-    fun findAll(): List<PostEntity> {
-        return postRepository.findAll()
+    fun findAll(limit: Int, offset: Int): List<PostEntity> {
+        val param = HashMap<String, Int>()
+        param["limit"] = limit
+        param["offset"] = offset
+        return postRepository.findAll(param)
     }
 
     @Transactional

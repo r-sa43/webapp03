@@ -4,10 +4,10 @@ import java.util.*
 
 class UserEntity {
 
-    val id: Int = 0
-    val user_cognito_id: String = ""
-    val name: String = ""
+    var id: Int = 0
+    var userCognitoId: String = ""
+    var name: String = ""
     val email: String = ""
-    val created_at: Date = Date()
-    val updated_at: Date = Date()
+    val createdAt: Date = Date()
+    val updatedAt: Date = Date()
 }
