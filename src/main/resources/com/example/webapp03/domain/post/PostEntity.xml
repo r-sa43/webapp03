@@ -5,11 +5,11 @@
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
     <!--<mapper namespace="posts">-->
 
-<!--    <select id="findAll" resultMap="postResult" parameterType="Map">-->
-<!--        select *-->
-<!--        from d_posts limit #{limit}-->
-<!--        offset #{offset};-->
-<!--    </select>-->
+    <select id="findAll" resultMap="postResult" parameterType="Map">
+        select *
+        from d_posts limit #{limit}
+        offset #{offset};
+    </select>
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
         <id column="post_id" property="postId"/>
@@ -41,14 +41,14 @@
     </resultMap>
 
 
-<!--    <select id="countGood" resultMap="countMap">-->
-<!--        select COUNT(*)-->
-<!--        from d_good-->
-<!--        where d_good.post_id = #{post_id};-->
-<!--    </select>-->
-<!--    <resultMap id="countMap" type="com.example.webapp03.domain.good.GoodEntity">-->
-<!--        <id column="post_id" property="postId"/>-->
-<!--    </resultMap>-->
+    <select id="countGood" resultMap="countMap">
+        select COUNT(*)
+        from d_good
+        where d_good.post_id = #{post_id};
+    </select>
+    <resultMap id="countMap" type="com.example.webapp03.domain.good.GoodEntity">
+        <id column="post_id" property="postId"/>
+    </resultMap>
 
 
     <insert id="save" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">
