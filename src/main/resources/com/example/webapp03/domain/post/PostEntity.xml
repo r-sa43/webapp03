@@ -5,19 +5,21 @@
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
     <!--<mapper namespace="posts">-->
 
-    <select id="findAll" resultMap="postResult" parameterType="Map">
-        select * from d_posts limit #{limit} offset #{offset};
-    </select>
+<!--    <select id="findAll" resultMap="postResult" parameterType="Map">-->
+<!--        select *-->
+<!--        from d_posts limit #{limit}-->
+<!--        offset #{offset};-->
+<!--    </select>-->
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
         <id column="post_id" property="postId"/>
         <result column="created_at" property="created"/>
         <collection
-                property="user"
-                ofType="com.example.webapp01.domain.user.UserEntity"
-                javaType="com.example.webapp03.domain.user.UserEntity"
-                column="user_id"
-                select="findUser"
+            property="user"
+            ofType="com.example.webapp01.domain.user.UserEntity"
+            javaType="com.example.webapp03.domain.user.UserEntity"
+            column="user_id"
+            select="findUser"
         />
         <collection
             property="goodCounts"
@@ -29,7 +31,9 @@
     </resultMap>
 
     <select id="findUser" resultMap="userMap">
-        select mu.name, mu.created_at from m_users as mu where mu.id = #{user_id}
+        select mu.name, mu.created_at
+        from m_users as mu
+        where mu.id = #{user_id}
     </select>
 
     <resultMap id="userMap" type="com.example.webapp03.domain.user.UserEntity">
@@ -37,14 +41,14 @@
     </resultMap>
 
 
-    <select id="countGood" resultMap="countMap">
-        SELECT COUNT(*)
-        FROM d_good
-        WHERE d_good.post_id = #{post_id};
-    </select>
-    <resultMap id="countMap" type="com.example.webapp03.domain.good.GoodEntity">
-        <id column="post_id" property="postId"/>
-    </resultMap>
+<!--    <select id="countGood" resultMap="countMap">-->
+<!--        select COUNT(*)-->
+<!--        from d_good-->
+<!--        where d_good.post_id = #{post_id};-->
+<!--    </select>-->
+<!--    <resultMap id="countMap" type="com.example.webapp03.domain.good.GoodEntity">-->
+<!--        <id column="post_id" property="postId"/>-->
+<!--    </resultMap>-->
 
 
     <insert id="save" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">
