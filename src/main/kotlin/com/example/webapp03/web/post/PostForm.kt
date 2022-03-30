@@ -7,6 +7,5 @@ class PostForm {
     val user_id: Int = 1
 
     @NotBlank
-    @Size(max=256)
-    val contents: String = ""
+    var contents: String = ""
 }
