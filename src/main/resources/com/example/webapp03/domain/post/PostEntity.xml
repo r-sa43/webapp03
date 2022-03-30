@@ -3,51 +3,29 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
-    <!--<mapper namespace="posts">-->
-
     <select id="findAll" resultMap="postResult" parameterType="Map">
-        select *
-        from d_posts limit #{limit}
+        select dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) as goodCounts
+        from d_posts as dp
+                 left join m_users as mu
+                           on mu.id = dp.user_id
+                 left join d_good as dg
+                           on dp.post_id = dg.post_id
+        group by dp.post_id
+            limit #{limit}
         offset #{offset};
     </select>
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
-        <id column="post_id" property="postId"/>
-        <result column="created_at" property="created"/>
-        <collection
-            property="user"
-            ofType="com.example.webapp01.domain.user.UserEntity"
-            javaType="com.example.webapp03.domain.user.UserEntity"
-            column="user_id"
-            select="findUser"
-        />
-        <collection
-            property="goodCounts"
-            ofType="com.example.webapp03.domain.good.GoodEntity"
-            javaType="Int"
-            column="post_id"
-            select="countGood"
-        />
+        <id property="postId" column="post_id"/>
+        <result property="contents" column="contents"/>
+        <result property="created" column="created_at"/>
+        <result property="goodCounts" column="goodCounts"/>
+        <association property="user" resultMap="userResult"/>
     </resultMap>
 
-    <select id="findUser" resultMap="userMap">
-        select mu.name, mu.created_at
-        from m_users as mu
-        where mu.id = #{user_id}
-    </select>
-
-    <resultMap id="userMap" type="com.example.webapp03.domain.user.UserEntity">
-        <id column="id" property="id"/>
-    </resultMap>
-
-
-    <select id="countGood" resultMap="countMap">
-        select COUNT(*)
-        from d_good
-        where d_good.post_id = #{post_id};
-    </select>
-    <resultMap id="countMap" type="com.example.webapp03.domain.good.GoodEntity">
-        <id column="post_id" property="postId"/>
+    <resultMap id="userResult" type="com.example.webapp03.domain.user.UserEntity">
+        <id property="id" column="user_id"/>
+        <result property="name" column="name"/>
     </resultMap>
 
 
