@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
     <select id="findAll" resultMap="postResult" parameterType="Map">
-        select dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) as goodCounts
+        select dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) as good_count
         from d_posts as dp
                  left join m_users as mu
                            on mu.id = dp.user_id
@@ -19,7 +19,7 @@
         <id property="postId" column="post_id"/>
         <result property="contents" column="contents"/>
         <result property="created" column="created_at"/>
-        <result property="goodCounts" column="goodCounts"/>
+        <result property="goodCounts" column="good_count"/>
         <association property="user" resultMap="userResult"/>
     </resultMap>
 
