@@ -9,10 +9,10 @@
         VALUES (#{postId}, #{userId})
     </insert>
 
-<!--    <insert id="delete" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">-->
-<!--        DELETE-->
-<!--        FROM d_good-->
-<!--        WHERE d_good.post_id = #{postId}-->
-<!--          AND d_good.user_id = #{userId}-->
-<!--    </insert>-->
+    <insert id="delete" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">
+        DELETE
+        FROM d_good
+        WHERE d_good.post_id = #{postId}
+          AND d_good.user_id = #{userId}
+    </insert>
 </mapper>

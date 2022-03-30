@@ -18,11 +18,11 @@ class GoodService(
         goodRepository.save(param)
     }
 
-//    @Transactional
-//    fun countDownGoodCnt(post_id: Int) {
-//        val param = HashMap<String, String>()
-//        param["userId"] = const.userId.toString()
-//        param["postId"] = post_id.toString()
-//        goodRepository.delete(param)
-//    }
+    @Transactional
+    fun countDownGoodCnt(post_id: Int) {
+        val param = HashMap<String, String>()
+        param["userId"] = const.userId.toString()
+        param["postId"] = post_id.toString()
+        goodRepository.delete(param)
+    }
 }

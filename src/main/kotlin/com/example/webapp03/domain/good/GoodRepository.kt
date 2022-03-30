@@ -7,5 +7,5 @@ interface GoodRepository {
 
     fun save(param: Map<String, String>)
 
-//    fun delete()
+    fun delete(param: Map<String, String>)
 }
