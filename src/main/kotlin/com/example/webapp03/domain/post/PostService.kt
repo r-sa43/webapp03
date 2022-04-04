@@ -1,5 +1,6 @@
 package com.example.webapp03.domain.post
 
+import com.example.webapp03.Constants
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -33,7 +34,7 @@ class PostService(
             ret += if (charContent.toString().toByteArray().size <= 1) 1 else 2
         }
 
-        val maxLen = 280
+        val maxLen = Constants.POST_CONTENTS_MAX_LEN
         return ret <= maxLen
     }
 }

@@ -17,7 +17,6 @@ class PostController(
     private val postService: PostService,
 ) {
 
-    // GET /post
     @GetMapping("")
     fun showPostList(
         @RequestParam("limit", defaultValue = "100", required = false) limit: Int,
@@ -28,13 +27,11 @@ class PostController(
         return "post/list"
     }
 
-//    GET /post/create
     @GetMapping("/create")
     fun showCreateForm(@ModelAttribute postForm: PostForm): String {
         return "post/createPost"
     }
 
-    // POST /post
     @PostMapping("")
     fun createPost(@Validated postForm: PostForm, bindingResult: BindingResult, model: Model): String {
         if (bindingResult.hasErrors()) {
@@ -43,6 +40,4 @@ class PostController(
         postService.create(postForm.user_id, postForm.contents)
         return "redirect:/post"
     }
-
-
 }
