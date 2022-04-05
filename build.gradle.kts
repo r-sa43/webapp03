@@ -24,6 +24,7 @@ dependencies {
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
 	implementation("mysql:mysql-connector-java")

@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
-    <!--<mapper namespace="posts">-->
-
     <select id="findAll" resultMap="postResult" parameterType="Map">
-        select * from d_posts limit #{limit} offset #{offset};
+        select dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) as good_count
+        from d_posts as dp
+                 left join m_users as mu
+                           on mu.id = dp.user_id
+                 left join d_good as dg
+                           on dp.post_id = dg.post_id
+        group by dp.post_id
+            limit #{limit}
+        offset #{offset};
     </select>
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
-        <id column="post_id" property="postId"/>
-        <result column="created_at" property="created"/>
-        <collection
-                property="user"
-                ofType="com.example.webapp01.domain.user.UserEntity"
-                javaType="com.example.webapp03.domain.user.UserEntity"
-                column="user_id"
-                select="findUser"
-        />
+        <id property="postId" column="post_id"/>
+        <result property="contents" column="contents"/>
+        <result property="created" column="created_at"/>
+        <result property="goodCounts" column="good_count"/>
+        <association property="user" resultMap="userResult"/>
     </resultMap>
 
-    <select id="findUser" resultMap="userMap">
-        select mu.name, mu.created_at from m_users as mu where mu.id = #{user_id}
-    </select>
-
-    <resultMap id="userMap" type="com.example.webapp03.domain.user.UserEntity">
-        <id column="id" property="id"/>
+    <resultMap id="userResult" type="com.example.webapp03.domain.user.UserEntity">
+        <id property="id" column="user_id"/>
+        <result property="name" column="name"/>
     </resultMap>
-
 
 
     <insert id="save" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">
-        INSERT INTO d_posts (user_id, contents) VALUES (#{userId}, #{contents})
+        INSERT INTO d_posts (user_id, contents)
+        VALUES (#{userId}, #{contents})
     </insert>
 </mapper>
