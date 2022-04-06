@@ -22,8 +22,6 @@ class AuthenticationFailureHandler : AuthenticationFailureHandler {
             errorId = "ERR-0001"
         }
 
-        println("認証失敗")
-//        httpServletResponse.sendRedirect(httpServletRequest.contextPath + "?error=" + errorId)
-        httpServletResponse.sendRedirect("/")
+        httpServletResponse.sendRedirect(httpServletRequest.contextPath + "?error=" + errorId)
     }
 }
