@@ -1,6 +1,6 @@
 package com.example.webapp03.domain.user
 
-import java.util.*
+import java.util.Date
 
 class UserEntity {
 
