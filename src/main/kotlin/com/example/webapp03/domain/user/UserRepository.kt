@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper
 interface UserRepository {
 
     fun findByEmail(email: String): UserEntity
+
+    fun save(user: Map<String, String>)
 }

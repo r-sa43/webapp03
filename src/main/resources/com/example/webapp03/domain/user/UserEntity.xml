@@ -5,6 +5,10 @@
 <mapper namespace="com.example.webapp03.domain.user.UserRepository">
 
     <select id="findByEmail" resultType="com.example.webapp03.domain.user.UserEntity" parameterType="String">
-        select name, password, email from m_users where m_users.email = #{email};
+        select id, name, password, email from m_users where m_users.email = #{email};
     </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="user_id" parameterType="Map">
+        INSERT INTO m_users (name, password, email) VALUES (#{name}, #{password}, #{email})
+    </insert>
 </mapper>

@@ -10,4 +10,8 @@ class UserService (
     fun findByEmail(email: String): UserEntity {
         return userRepository.findByEmail(email)
     }
+
+    fun save(user: Map<String, String>) {
+        userRepository.save(user)
+    }
 }

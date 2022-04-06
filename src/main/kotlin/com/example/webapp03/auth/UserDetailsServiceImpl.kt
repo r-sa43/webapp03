@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component
@@ -23,9 +22,6 @@ class UserDetailsServiceImpl : UserDetailsService {
 
         try {
             user = userService.findByEmail(email)
-            println("UserDetailsServiceImpl is")
-            println(user.email)
-            println(user.password)
         } catch (e: Exception) {
             throw UsernameNotFoundException("It can not be acquired User")
         }
@@ -34,8 +30,6 @@ class UserDetailsServiceImpl : UserDetailsService {
         val authority: GrantedAuthority = SimpleGrantedAuthority("USER")
         grantList.add(authority)
 
-        val encoder: BCryptPasswordEncoder = BCryptPasswordEncoder()
-//        return LoginUser(user)
-        return User(user.email, encoder.encode(user.password), grantList)
+        return User(user.email, "${user.password}", grantList)
     }
 }

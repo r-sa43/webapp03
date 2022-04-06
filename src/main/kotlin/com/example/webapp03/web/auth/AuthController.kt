@@ -1,31 +1,39 @@
 package com.example.webapp03.web.auth
 
-import com.example.webapp03.domain.user.UserEntity
+import com.example.webapp03.auth.CustomPasswordEncoder
 import com.example.webapp03.domain.user.UserService
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("auth")
 class AuthController(
     private val userService: UserService,
+    private val encoder: CustomPasswordEncoder,
 ) {
 
-    @GetMapping("/login")
-    fun showLoginForm(
-        @ModelAttribute authForm: AuthForm,
-    ): String {
-        println("GET auth/login")
-        val user: UserEntity = userService.findByEmail("sashimi@gmail.com")
-        println(user)
-        return "auth/login"
+    @GetMapping("/signin")
+    fun showLoginForm(): String {
+        return "auth/signin"
     }
 
-//    @PostMapping("/login")
-//    fun login(): String {
-//        println("POST auth/login")
-//        return "redirect:/post"
-//    }
+    @GetMapping("/signup")
+    fun showSignInForm(
+        @ModelAttribute authForm: AuthForm,
+    ): String {
+        return "auth/signup"
+    }
+
+    @PostMapping("/signup")
+    fun signup(authForm: AuthForm): String {
+        val user = HashMap<String, String>()
+        user["name"] = authForm.name
+        user["email"] = authForm.email
+        user["password"] = encoder.passwordEncoder().encode(authForm.password)
+        userService.save(user)
+        return "redirect:/post"
+    }
 }

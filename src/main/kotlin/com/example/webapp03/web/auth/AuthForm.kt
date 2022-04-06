@@ -4,4 +4,5 @@ class AuthForm {
 
     var email = ""
     var password = ""
+    var name = ""
 }
