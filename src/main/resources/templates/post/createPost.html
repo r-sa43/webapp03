@@ -11,7 +11,7 @@
     <div class="card-body">
         <form action="#" th:action="@{/post}" th:method="post" th:object="${postForm}">
             <div class="form-group">
-                <label for="descriptionInput">内容入力</label>
+                <label for="contentsInput">内容入力</label>
                 <textarea class="form-control" id="contentsInput" rows="10" th:field="*{contents}"></textarea>
                 <small class="form-text text-muted" th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}">(error_msg)</small>
                 <p id="log"></p>
@@ -45,7 +45,6 @@
             ret += str.match(/[ -~]/) ? 1 : 2;
         });
         const maxLen = 280;
-        console.log(ret)
         return ret <= maxLen;
     }
 </script>

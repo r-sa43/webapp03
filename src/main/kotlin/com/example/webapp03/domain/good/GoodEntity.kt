@@ -4,6 +4,6 @@ import java.math.BigInteger
 
 class GoodEntity {
 
-    private val post_id: BigInteger = BigInteger.ZERO
-    private val user_id: Int = 0
+    val postId: BigInteger = BigInteger.ZERO
+    val userId: Int = 0
 }
