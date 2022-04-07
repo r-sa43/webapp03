@@ -4,5 +4,7 @@ class Constants {
 
     companion object {
         const val POST_CONTENTS_MAX_LEN = 280
+
+        const val USER_ID = 100 // temporary
     }
 }

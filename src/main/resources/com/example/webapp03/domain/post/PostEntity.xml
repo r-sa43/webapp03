@@ -24,7 +24,7 @@
     </resultMap>
 
     <resultMap id="userResult" type="com.example.webapp03.domain.user.UserEntity">
-        <id property="id" column="user_id"/>
+        <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>
 

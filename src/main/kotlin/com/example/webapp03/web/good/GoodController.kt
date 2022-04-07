@@ -16,12 +16,10 @@ class GoodController(
     fun updateGoodCount(
         @RequestBody goodInfo: GoodInfo
     ): String {
-        println(goodInfo.post_id)
-        println(goodInfo.is_marked)
-        if (goodInfo.is_marked) {
-            goodService.countDownGoodCnt(goodInfo.post_id)
+        if (goodInfo.marked) {
+            goodService.countDownGoodCnt(goodInfo.postId)
         } else {
-            goodService.countUpGoodCnt(goodInfo.post_id)
+            goodService.countUpGoodCnt(goodInfo.postId)
         }
 
         return "post/list"

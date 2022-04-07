@@ -1,6 +1,5 @@
 package com.example.webapp03.web.post
 
-import com.example.webapp03.domain.post.PostEntity
 import com.example.webapp03.domain.post.PostService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
