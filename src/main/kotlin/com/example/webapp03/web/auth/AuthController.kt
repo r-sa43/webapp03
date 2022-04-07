@@ -1,8 +1,6 @@
 package com.example.webapp03.web.auth
 
-import com.example.webapp03.auth.CustomPasswordEncoder
 import com.example.webapp03.domain.user.UserService
-import com.example.webapp03.web.post.PostForm
 import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated

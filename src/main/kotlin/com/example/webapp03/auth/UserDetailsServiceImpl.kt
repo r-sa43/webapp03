@@ -30,6 +30,6 @@ class UserDetailsServiceImpl : UserDetailsService {
         val authority: GrantedAuthority = SimpleGrantedAuthority("USER")
         grantList.add(authority)
 
-        return User(user.email, "${user.password}", grantList)
+        return User(user.email, user.password, grantList)
     }
 }

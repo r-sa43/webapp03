@@ -1,7 +1,6 @@
 package com.example.webapp03.web.post
 
 import com.example.webapp03.domain.post.PostService
-import com.example.webapp03.domain.user.UserEntity
 import com.example.webapp03.domain.user.UserService
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
-import java.math.BigInteger
-import javax.servlet.http.HttpSession
-import kotlin.math.log
 
 @Controller
 @RequestMapping("post")

@@ -4,15 +4,15 @@
 
 <mapper namespace="com.example.webapp03.domain.post.PostRepository">
     <select id="findAll" resultMap="postResult" parameterType="Map">
-        select dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) as good_count
-        from d_posts as dp
-                 left join m_users as mu
-                           on mu.id = dp.user_id
-                 left join d_good as dg
-                           on dp.post_id = dg.post_id
-        group by dp.post_id
+        SELECT dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) AS good_count
+        FROM d_posts AS dp
+                 LEFT JOIN m_users AS mu
+                           ON mu.id = dp.user_id
+                 LEFT JOIN d_good AS dg
+                           ON dp.post_id = dg.post_id
+        GROUP BY dp.post_id
             limit #{limit}
-        offset #{offset};
+        OFFSET #{offset};
     </select>
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
