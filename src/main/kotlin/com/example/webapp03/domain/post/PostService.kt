@@ -1,6 +1,6 @@
 package com.example.webapp03.domain.post
 
-import com.example.webapp03.Constants
+import com.example.webapp03.config.Constants
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
