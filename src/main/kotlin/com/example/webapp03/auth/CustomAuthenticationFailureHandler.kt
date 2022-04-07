@@ -8,7 +8,7 @@ import javax.servlet.ServletException
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class AuthenticationFailureHandler : AuthenticationFailureHandler {
+class CustomAuthenticationFailureHandler : AuthenticationFailureHandler {
 
     @Throws(IOException::class, ServletException::class)
     override fun onAuthenticationFailure(
@@ -17,7 +17,7 @@ class AuthenticationFailureHandler : AuthenticationFailureHandler {
         authenticationException: AuthenticationException
     ) {
 
-        var errorId = ""
+        var errorId = "ERR-0000"
         if (authenticationException is BadCredentialsException) {
             errorId = "ERR-0001"
         }

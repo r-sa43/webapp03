@@ -39,7 +39,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
             .usernameParameter("email")
             .passwordParameter("password")
             .defaultSuccessUrl("/post", true)
-            .failureHandler(AuthenticationFailureHandler())
+            .failureHandler(CustomAuthenticationFailureHandler())
             .permitAll()
             .and()
 
