@@ -2,7 +2,10 @@ package com.example.webapp03.web.auth
 
 import com.example.webapp03.auth.CustomPasswordEncoder
 import com.example.webapp03.domain.user.UserService
+import com.example.webapp03.web.post.PostForm
 import org.springframework.stereotype.Controller
+import org.springframework.validation.BindingResult
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
@@ -12,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping("auth")
 class AuthController(
     private val userService: UserService,
-    private val encoder: CustomPasswordEncoder,
 ) {
 
     @GetMapping("/signin")
@@ -21,19 +23,13 @@ class AuthController(
     }
 
     @GetMapping("/signup")
-    fun showSignInForm(
-        @ModelAttribute authForm: AuthForm,
-    ): String {
+    fun showSignInForm(@ModelAttribute authForm: AuthForm): String {
         return "auth/signup"
     }
 
     @PostMapping("/signup")
-    fun signup(authForm: AuthForm): String {
-        val user = HashMap<String, String>()
-        user["name"] = authForm.name
-        user["email"] = authForm.email
-        user["password"] = encoder.passwordEncoder().encode(authForm.password)
-        userService.save(user)
+    fun signup(@Validated authForm: AuthForm, bindingResult: BindingResult): String {
+        userService.save(authForm)
         return "redirect:/post"
     }
 }
