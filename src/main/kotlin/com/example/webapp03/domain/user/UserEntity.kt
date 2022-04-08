@@ -5,6 +5,7 @@ import java.util.Date
 class UserEntity {
 
     var id: Int = 0
+    var password: String = ""
     var userCognitoId: String = ""
     var name: String = ""
     val email: String = ""
