@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html
-        xmlns:th="http://www.thymeleaf.org"
-        th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
+    xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
 <head>
-    <title>Top</title>
+    <title>Personal post</title>
 </head>
 <body>
-<p class="h3">Top</p>
+<p class="h3">Personal post</p>
 <div class="list-group" th:each="post: ${postList}">
     <div class="list-group-item list-group-item-action" >
         <div class="card">

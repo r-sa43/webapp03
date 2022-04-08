@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <html
-        xmlns:th="http://www.thymeleaf.org"
-        th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
+    xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
 <head>
     <title>Title</title>
 </head>
@@ -17,21 +17,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">index</a>
+                        <a class="nav-link" th:href="@{/post}">Top</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./post/list.html" th:href="@{/post}">Top</a>
-                    </li>
-
-<!--                    remove -->
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="./post/createPost.html" th:href="@{/post/create}">投稿作成画面</a></li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="./post/me.html" th:href="@{/post/me}">個人投稿ページ</a>
+                        <a class="nav-link" th:href="@{/post/create}">Create</a>
                     </li>
                     <li class="nav-item">
-                        <form method="POST" name="signOutForm" th:action="@{/logout}">
-                            <a class="nav-link" href="javascript:signOutForm.submit()">Sign out</a>
+                        <a class="nav-link" th:href="@{/post/me}">Personal post</a>
+                    </li>
+                    <li class="nav-item">
+                        <form th:action="@{/logout}" method="post" name="logoutForm">
+                            <a class="nav-link" href="javascript:logoutForm.submit()">Sign out</a>
                         </form>
                     </li>
                 </ul>
