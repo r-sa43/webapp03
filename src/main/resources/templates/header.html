@@ -30,7 +30,9 @@
                         <a class="nav-link" href="./post/me.html" th:href="@{/post/me}">個人投稿ページ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./auth/login.html">Sign out</a>
+                        <form method="POST" name="signOutForm" th:action="@{/logout}">
+                            <a class="nav-link" href="javascript:signOutForm.submit()">Sign out</a>
+                        </form>
                     </li>
                 </ul>
             </div>

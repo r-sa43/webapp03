@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.webapp03.domain.user.UserRepository">
+
+    <select id="findByEmail" resultType="com.example.webapp03.domain.user.UserEntity" parameterType="String">
+        SELECT id, name, password, email FROM m_users WHERE m_users.email = #{email};
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="user_id" parameterType="Map">
+        INSERT INTO m_users (name, password, email) VALUES (#{name}, #{password}, #{email})
+    </insert>
+</mapper>
