@@ -37,4 +37,11 @@ class PostService(
         val maxLen = Constants.POST_CONTENTS_MAX_LEN
         return ret <= maxLen
     }
+
+    fun deletePost(userId: Int, postId: Int) {
+        val param = HashMap<String, Int>()
+        param["userId"] = userId
+        param["postId"] = postId
+        postRepository.delete(param)
+    }
 }

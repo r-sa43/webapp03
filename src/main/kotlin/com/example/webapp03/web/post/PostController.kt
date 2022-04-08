@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -43,5 +44,11 @@ class PostController(
         val userId: Int = userService.findByEmail(loginUser.name).id
         postService.create(userId, postForm.contents)
         return "redirect:/post"
+    }
+
+    @PostMapping("/me/{postId}")
+    fun deletePost(@PathVariable("postId") postId: Int, loginUser: Authentication) {
+        val userId: Int = userService.findByEmail(loginUser.name).id
+        postService.deletePost(userId, postId)
     }
 }
