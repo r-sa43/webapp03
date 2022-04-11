@@ -34,24 +34,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    const url = "http://localhost:8080/good";
-
-    async function updateGoodCnt(postId, marked) {
-        const body = {
-            postId: postId,
-            marked: marked
-        };
-        await fetch(url, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        });
-        location.reload()
-    }
-</script>
 </body>
 </html>
