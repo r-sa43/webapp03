@@ -57,8 +57,10 @@ class PostController(
     }
 
     @PostMapping("/me/{postId}")
-    fun deletePost(@PathVariable("postId") postId: Int, loginUser: Authentication) {
+    fun deletePost(@PathVariable("postId") postId: Int, loginUser: Authentication): String {
         val userId: Int = userService.findByEmail(loginUser.name).id
         postService.deletePost(userId, postId)
+
+        return "redirect:/post/me"
     }
 }
