@@ -1,12 +1,11 @@
 package com.example.webapp03.domain.good
 
-import com.example.webapp03.config.Constants
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GoodService(
-    private val goodRepository: GoodRepository,
+    private val goodRepository: GoodRepository
 ) {
 
     fun findListByUserId(userId: Int): List<Int> {

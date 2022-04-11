@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam
 class PostController(
     private val postService: PostService,
     private val userService: UserService,
-    private val goodService: GoodService,
+    private val goodService: GoodService
 ) {
 
     @GetMapping("")

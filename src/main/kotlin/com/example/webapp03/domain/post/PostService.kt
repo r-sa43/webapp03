@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PostService(
-    private val postRepository: PostRepository,
+    private val postRepository: PostRepository
 ) {
 
     fun findAll(limit: Int, offset: Int): List<PostEntity> {

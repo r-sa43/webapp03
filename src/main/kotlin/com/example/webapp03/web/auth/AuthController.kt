@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("auth")
 class AuthController(
-    private val userService: UserService,
+    private val userService: UserService
 ) {
 
     @GetMapping("/signin")
