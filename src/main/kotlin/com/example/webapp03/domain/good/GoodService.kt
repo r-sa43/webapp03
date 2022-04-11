@@ -9,19 +9,23 @@ class GoodService(
     private val goodRepository: GoodRepository,
 ) {
 
+    fun findListByUserId(userId: Int): List<Int> {
+        return goodRepository.findByUserId(userId)
+    }
+
     @Transactional
-    fun countUpGoodCnt(post_id: Int) {
-        val param = HashMap<String, String>()
-        param["userId"] = Constants.USER_ID.toString()
-        param["postId"] = post_id.toString()
+    fun countUpGoodCnt(postId: Int, userId: Int) {
+        val param = HashMap<String, Int>()
+        param["userId"] = userId
+        param["postId"] = postId
         goodRepository.save(param)
     }
 
     @Transactional
-    fun countDownGoodCnt(post_id: Int) {
-        val param = HashMap<String, String>()
-        param["userId"] = Constants.USER_ID.toString()
-        param["postId"] = post_id.toString()
+    fun countDownGoodCnt(postId: Int, userId: Int) {
+        val param = HashMap<String, Int>()
+        param["userId"] = userId
+        param["postId"] = postId
         goodRepository.delete(param)
     }
 }

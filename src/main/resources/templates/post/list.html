@@ -21,8 +21,8 @@
                     <p class="card-text p-2 bd-highlight" th:text="${post.goodCounts}">(Good Count)</p>
                     <button
                         type="button" class="good-btn btn btn-outline-primary"
-                        th:styleappend="${(post.goodCounts>=1)} ? 'background-color: gray;' : ''"
-                        th:onclick="|updateGoodCnt('__${post.postId}__', '__${(post.goodCounts>=1)}__')|"
+                        th:styleappend="${#lists.contains(goodList, post.postId.intValue())} ? 'background-color: gray;' : ''"
+                        th:onclick="|updateGoodCnt('__${post.postId}__', '__${#lists.contains(goodList, post.postId.intValue())}__')|"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
                             <path

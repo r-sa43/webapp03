@@ -5,7 +5,9 @@ import org.apache.ibatis.annotations.Mapper
 @Mapper
 interface GoodRepository {
 
-    fun save(param: Map<String, String>)
+    fun findByUserId(userId: Int): List<Int>
 
-    fun delete(param: Map<String, String>)
+    fun save(param: Map<String, Int>)
+
+    fun delete(param: Map<String, Int>)
 }

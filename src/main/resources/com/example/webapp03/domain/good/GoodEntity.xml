@@ -4,15 +4,21 @@
 
 <mapper namespace="com.example.webapp03.domain.good.GoodRepository">
 
+    <select id="findByUserId" resultType="Int" parameterType="Int">
+        SELECT d_good.post_id
+        FROM d_good
+        WHERE d_good.user_id = #{userId}
+    </select>
+
     <insert id="save" useGeneratedKeys="true" parameterType="Map">
         INSERT INTO d_good (post_id, user_id)
         VALUES (#{postId}, #{userId})
     </insert>
 
-    <insert id="delete" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">
+    <delete id="delete" parameterType="Map">
         DELETE
         FROM d_good
         WHERE d_good.post_id = #{postId}
           AND d_good.user_id = #{userId}
-    </insert>
+    </delete>
 </mapper>
