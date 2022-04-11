@@ -22,7 +22,7 @@ class UserService(
         user["email"] = authForm.email
         user["password"] = encoder.passwordEncoder().encode(authForm.password)
 
-        val existUser: UserEntity = userRepository.findByEmail(authForm.email)
+        val existUser = userRepository.findByEmail(authForm.email)
         if (existUser == null) {
             userRepository.save(user)
         }
