@@ -45,15 +45,4 @@ class GoodController(
 
         return "post/list"
     }
-
-    @ExceptionHandler(DuplicateKeyException::class)
-    fun duplicateKeyExceptionHandler(
-        ex: DuplicateKeyException,
-        model: Model
-    ): String {
-        model.addAttribute("error", "Internal Server Error")
-        model.addAttribute("message", "DuplicateKeyException")
-
-        return "error"
-    }
 }
