@@ -16,6 +16,10 @@ class PostService(
         return postRepository.findAll(param)
     }
 
+    fun findByUserId(userId: Int): List<PostEntity> {
+        return postRepository.findByUserId(userId)
+    }
+
     @Transactional
     fun create(user_id: Int, contents: String) {
         val isValidLen: Boolean = validateStrLength(contents)
