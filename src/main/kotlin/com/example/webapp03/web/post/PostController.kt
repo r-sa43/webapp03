@@ -1,5 +1,6 @@
 package com.example.webapp03.web.post
 
+import com.example.webapp03.domain.good.GoodService
 import com.example.webapp03.domain.post.PostService
 import com.example.webapp03.domain.user.UserService
 import org.springframework.security.core.Authentication
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam
 class PostController(
     private val postService: PostService,
     private val userService: UserService,
+    private val goodService: GoodService
 ) {
 
     @GetMapping("")
@@ -26,8 +28,12 @@ class PostController(
         @RequestParam("limit", defaultValue = "100", required = false) limit: Int,
         @RequestParam("offset", defaultValue = "0", required = false) offset: Int,
         model: Model,
+        loginUser: Authentication
     ): String {
         model.addAttribute("postList", postService.findAll(limit, offset))
+
+        val userId: Int = userService.findByEmail(loginUser.name).id
+        model.addAttribute("goodList", goodService.findListByUserId(userId))
         return "post/list"
     }
 
