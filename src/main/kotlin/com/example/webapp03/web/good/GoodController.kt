@@ -1,8 +1,8 @@
 package com.example.webapp03.web.good
 
+import com.example.webapp03.auth.CustomUserDetails
 import com.example.webapp03.domain.good.GoodService
-import com.example.webapp03.domain.user.UserService
-import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PutMapping
@@ -13,8 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 @Controller
 @RequestMapping("good")
 class GoodController(
-    private val goodService: GoodService,
-    private val userService: UserService
+    private val goodService: GoodService
 ) {
 
     @PutMapping("")
@@ -22,7 +21,7 @@ class GoodController(
         @RequestBody goodInfo: GoodInfo,
         result: BindingResult,
         redirectAttributes: RedirectAttributes,
-        loginUser: Authentication
+        @AuthenticationPrincipal loginUser: CustomUserDetails
     ): String {
 
         if (result.hasErrors()) {
@@ -32,7 +31,7 @@ class GoodController(
             return "post/list"
         }
 
-        val userId: Int = userService.findByEmail(loginUser.name).id
+        val userId = loginUser.getId()
 
         if (goodInfo.marked) {
             goodService.countDownGoodCnt(goodInfo.postId, userId)

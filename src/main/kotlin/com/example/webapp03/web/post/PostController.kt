@@ -1,9 +1,9 @@
 package com.example.webapp03.web.post
 
+import com.example.webapp03.auth.CustomUserDetails
 import com.example.webapp03.domain.good.GoodService
 import com.example.webapp03.domain.post.PostService
-import com.example.webapp03.domain.user.UserService
-import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam
 @RequestMapping("post")
 class PostController(
     private val postService: PostService,
-    private val userService: UserService,
     private val goodService: GoodService
 ) {
 
@@ -28,11 +27,11 @@ class PostController(
         @RequestParam("limit", defaultValue = "100", required = false) limit: Int,
         @RequestParam("offset", defaultValue = "0", required = false) offset: Int,
         model: Model,
-        loginUser: Authentication
+        @AuthenticationPrincipal loginUser: CustomUserDetails
     ): String {
         model.addAttribute("postList", postService.findAll(limit, offset))
 
-        val userId: Int = userService.findByEmail(loginUser.name).id
+        val userId = loginUser.getId()
         model.addAttribute("goodList", goodService.findListByUserId(userId))
         return "post/list"
     }
@@ -45,26 +44,26 @@ class PostController(
     @GetMapping("/me")
     fun showMyPostList(
         model: Model,
-        loginUser: Authentication,
+        @AuthenticationPrincipal loginUser: CustomUserDetails
     ): String {
-        val userId: Int = userService.findByEmail(loginUser.name).id
+        val userId = loginUser.getId()
         model.addAttribute("postList", postService.findByUserId(userId))
         return "post/postMe"
     }
 
     @PostMapping("")
-    fun createPost(@Validated postForm: PostForm, bindingResult: BindingResult, model: Model, loginUser: Authentication): String {
+    fun createPost(@Validated postForm: PostForm, bindingResult: BindingResult, model: Model, @AuthenticationPrincipal loginUser: CustomUserDetails): String {
         if (bindingResult.hasErrors()) {
             return showCreateForm(postForm)
         }
-        val userId: Int = userService.findByEmail(loginUser.name).id
+        val userId = loginUser.getId()
         postService.create(userId, postForm.contents)
         return "redirect:/post"
     }
 
     @PostMapping("/me/{postId}")
-    fun deletePost(@PathVariable("postId") postId: Int, loginUser: Authentication): String {
-        val userId: Int = userService.findByEmail(loginUser.name).id
+    fun deletePost(@PathVariable("postId") postId: Int, @AuthenticationPrincipal loginUser: CustomUserDetails): String {
+        val userId = loginUser.getId()
         postService.deletePost(userId, postId)
 
         return "redirect:/post/me"
