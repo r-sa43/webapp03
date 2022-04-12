@@ -41,6 +41,16 @@ class PostController(
         return "post/createPost"
     }
 
+    @GetMapping("/me")
+    fun showMyPostList(
+        model: Model,
+        loginUser: Authentication,
+    ): String {
+        val userId: Int = userService.findByEmail(loginUser.name).id
+        model.addAttribute("postList", postService.findByUserId(userId))
+        return "post/postMe"
+    }
+
     @PostMapping("")
     fun createPost(@Validated postForm: PostForm, bindingResult: BindingResult, model: Model, loginUser: Authentication): String {
         if (bindingResult.hasErrors()) {

@@ -3,9 +3,10 @@
     xmlns:th="http://www.thymeleaf.org"
     th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
 <head>
-    <title>Title</title>
+    <title>Top</title>
 </head>
 <body>
+<p class="h3">Top</p>
 <div class="list-group" th:each="post: ${postList}">
     <div class="list-group-item list-group-item-action">
         <div class="card">

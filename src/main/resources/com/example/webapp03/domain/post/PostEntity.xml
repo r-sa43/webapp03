@@ -15,6 +15,17 @@
         OFFSET #{offset};
     </select>
 
+    <select id="findByUserId" resultMap="postResult" parameterType="int">
+        SELECT dp.post_id, dp.contents, dp.created_at, mu.id, mu.name, COUNT(dg.post_id) AS good_count
+        FROM d_posts AS dp
+                 LEFT JOIN m_users AS mu
+                           ON mu.id = dp.user_id
+                 LEFT JOIN d_good AS dg
+                           ON dp.post_id = dg.post_id
+        WHERE dp.user_id = #{userId}
+        GROUP BY dp.post_id
+    </select>
+
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
         <id property="postId" column="post_id"/>
         <result property="contents" column="contents"/>
@@ -27,7 +38,6 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>
-
 
     <insert id="save" useGeneratedKeys="true" keyProperty="post_id" parameterType="Map">
         INSERT INTO d_posts (user_id, contents)
