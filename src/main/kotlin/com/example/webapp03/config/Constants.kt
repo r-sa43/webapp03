@@ -1,4 +1,4 @@
-package com.example.webapp03
+package com.example.webapp03.config
 
 class Constants {
 
