@@ -10,4 +10,6 @@ interface PostRepository {
     fun findByUserId(userId: Int): List<PostEntity>
 
     fun save(param: Map<String, String>)
+
+    fun delete(param: Map<String, Int>)
 }

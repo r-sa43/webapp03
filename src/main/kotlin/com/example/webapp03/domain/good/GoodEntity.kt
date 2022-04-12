@@ -6,4 +6,5 @@ class GoodEntity {
 
     val postId: BigInteger = BigInteger.ZERO
     val userId: Int = 0
+    val postIdList: List<Int> = listOf()
 }

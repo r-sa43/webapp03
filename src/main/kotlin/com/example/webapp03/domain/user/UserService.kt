@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class UserService(
     private val userRepository: UserRepository,
-    private val encoder: CustomPasswordEncoder,
+    private val encoder: CustomPasswordEncoder
 ) {
 
     fun findByEmail(email: String): UserEntity {
@@ -22,7 +22,7 @@ class UserService(
         user["email"] = authForm.email
         user["password"] = encoder.passwordEncoder().encode(authForm.password)
 
-        val existUser = userRepository.findByEmail(authForm.email)
+        val existUser: UserEntity = findByEmail(authForm.email)
         if (existUser == null) {
             userRepository.save(user)
         }

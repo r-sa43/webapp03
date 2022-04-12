@@ -1,6 +1,6 @@
 package com.example.webapp03.domain.post
 
-import com.example.webapp03.Constants
+import com.example.webapp03.config.Constants
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -40,5 +40,12 @@ class PostService(
 
         val maxLen = Constants.POST_CONTENTS_MAX_LEN
         return ret <= maxLen
+    }
+
+    fun deletePost(userId: Int, postId: Int) {
+        val param = HashMap<String, Int>()
+        param["userId"] = userId
+        param["postId"] = postId
+        postRepository.delete(param)
     }
 }

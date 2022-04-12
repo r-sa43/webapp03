@@ -35,7 +35,7 @@
     </resultMap>
 
     <resultMap id="userResult" type="com.example.webapp03.domain.user.UserEntity">
-        <id property="id" column="user_id"/>
+        <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>
 
@@ -43,4 +43,11 @@
         INSERT INTO d_posts (user_id, contents)
         VALUES (#{userId}, #{contents})
     </insert>
+
+    <delete id="delete" parameterType="Map">
+        DELETE
+        FROM d_posts
+        WHERE d_posts.user_id = #{userId}
+          AND d_posts.post_id = #{postId}
+    </delete>
 </mapper>

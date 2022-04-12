@@ -10,7 +10,6 @@ class PostEntity {
     val userId: Int = 0
     val contents: String = ""
     val created: Date = Date()
-    val users: List<UserEntity> = listOf()
     val goodCounts: Int = 0
     val user: UserEntity = UserEntity()
 }
