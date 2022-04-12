@@ -11,4 +11,8 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="user_id" parameterType="Map">
         INSERT INTO m_users (name, password, email) VALUES (#{name}, #{password}, #{email})
     </insert>
+
+    <update id="updatePassword" parameterType="Map">
+        UPDATE m_users SET m_users.password = (#{password}) WHERE m_users.id = #{userId}
+    </update>
 </mapper>
