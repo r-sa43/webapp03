@@ -43,4 +43,11 @@
         INSERT INTO d_posts (user_id, contents)
         VALUES (#{userId}, #{contents})
     </insert>
+
+    <delete id="delete" parameterType="Map">
+        DELETE
+        FROM d_posts
+        WHERE d_posts.user_id = #{userId}
+          AND d_posts.post_id = #{postId}
+    </delete>
 </mapper>

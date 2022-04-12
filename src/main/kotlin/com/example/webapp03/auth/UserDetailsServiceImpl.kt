@@ -1,35 +1,56 @@
 package com.example.webapp03.auth
 
 import com.example.webapp03.domain.user.UserEntity
-import com.example.webapp03.domain.user.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Component
 
 @Component
-class UserDetailsServiceImpl : UserDetailsService {
-
-    @Autowired
-    lateinit var userService: UserService
+class UserDetailsServiceImpl(
+    private val authenticationService: AuthenticationService
+) : UserDetailsService {
 
     override fun loadUserByUsername(email: String): UserDetails {
-        val user: UserEntity?
+        val user = authenticationService.findUser(email)
+        return CustomUserDetails(user)
+    }
+}
 
-        try {
-            user = userService.findByEmail(email)
-        } catch (e: Exception) {
-            throw UsernameNotFoundException("It can not be acquired User")
-        }
+data class CustomUserDetails(var userId: Int, val email: String, val pass: String) : UserDetails {
 
-        val grantList: MutableList<GrantedAuthority> = ArrayList()
-        val authority: GrantedAuthority = SimpleGrantedAuthority("USER")
-        grantList.add(authority)
+    constructor(user: UserEntity) : this(user.id, user.email, user.password)
 
-        return User(user.email, user.password, grantList)
+    fun getId(): Int {
+        return userId
+    }
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        return AuthorityUtils.createAuthorityList("USER")
+    }
+
+    override fun getPassword(): String {
+        return this.pass
+    }
+
+    override fun getUsername(): String {
+        return this.email
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return true
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isEnabled(): Boolean {
+        return true
     }
 }
