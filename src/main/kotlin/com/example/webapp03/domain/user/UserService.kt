@@ -1,6 +1,7 @@
 package com.example.webapp03.domain.user
 
 import com.example.webapp03.auth.CustomPasswordEncoder
+import com.example.webapp03.auth.CustomUserDetails
 import com.example.webapp03.web.auth.AuthForm
 import com.example.webapp03.web.user.UserForm
 import org.springframework.stereotype.Service
@@ -30,10 +31,12 @@ class UserService(
     }
 
     @Transactional
-    fun updatePassword(userInfo: UserForm) {
-        if (encoder.passwordEncoder().matches(userInfo.beforePassword, userInfo.password)) {
+    fun updatePassword(userInfo: UserForm, loginUser: CustomUserDetails) {
+        val userId = loginUser.getId()
+        val password = loginUser.password
+        if (encoder.passwordEncoder().matches(userInfo.beforePassword, password)) {
             val user = HashMap<String, String>()
-            user["userId"] = userInfo.userId.toString()
+            user["userId"] = userId.toString()
             user["password"] = encoder.passwordEncoder().encode(userInfo.newPassword)
 
             userRepository.updatePassword(user)

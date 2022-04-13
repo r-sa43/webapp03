@@ -28,9 +28,7 @@ class UserController(
         bindingResult: BindingResult,
         @AuthenticationPrincipal loginUser: CustomUserDetails
     ): String {
-        userForm.userId = loginUser.getId()
-        userForm.password = loginUser.password
-        userService.updatePassword(userForm)
+        userService.updatePassword(userForm, loginUser)
         return "redirect:/auth/signin"
     }
 }
