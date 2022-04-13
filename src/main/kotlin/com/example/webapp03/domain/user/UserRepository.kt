@@ -8,4 +8,6 @@ interface UserRepository {
     fun findByEmail(email: String): UserEntity
 
     fun save(user: Map<String, String>)
+
+    fun updatePassword(user: Map<String, String>)
 }
