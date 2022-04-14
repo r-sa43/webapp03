@@ -11,8 +11,10 @@
                  LEFT JOIN d_good AS dg
                            ON dp.post_id = dg.post_id
         GROUP BY dp.post_id
-            limit #{limit}
-        OFFSET #{offset};
+        ORDER BY dp.created_at DESC
+            LIMIT #{limit}
+        OFFSET #{offset}
+
     </select>
 
     <select id="findByUserId" resultMap="postResult" parameterType="int">
@@ -24,6 +26,7 @@
                            ON dp.post_id = dg.post_id
         WHERE dp.user_id = #{userId}
         GROUP BY dp.post_id
+        ORDER BY dp.created_at DESC
     </select>
 
     <resultMap id="postResult" type="com.example.webapp03.domain.post.PostEntity">
